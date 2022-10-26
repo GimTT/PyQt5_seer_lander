@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>90</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>110</y>
+      <width>160</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout"/>
+   </widget>
+   <widget class="QLabel" name="label_DangQian">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>20</y>
+      <width>30</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>当前：</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="horizontalSlider">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>50</y>
+      <width>160</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Bei">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>20</y>
+      <width>21</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>倍</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_QueRen">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>15</y>
+      <width>75</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_HuiFu">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>50</y>
+      <width>75</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>恢复</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_speed">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>15</y>
+      <width>50</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SeerFreeKnapsack</class>
+ <widget class="QMainWindow" name="SeerFreeKnapsack">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>367</width>
+    <height>606</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pack1button1q">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>75</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack1button2c">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>75</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie1">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>25</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie2">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>25</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie3">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>25</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie4">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>25</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie5">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>25</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie6">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>25</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie7">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>50</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie8">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>50</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie9">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>50</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie10">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>50</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie11">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>50</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack1genie12">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>50</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie1">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>125</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack2button1q">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>175</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie10">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>150</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack2button2c">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>175</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie2">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>125</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie11">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>150</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie4">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>125</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie7">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>150</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie6">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>125</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie12">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>150</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie3">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>125</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie5">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>125</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie8">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>150</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack2genie9">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>150</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>5</y>
+      <width>35</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>背包1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>105</y>
+      <width>35</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>背包2</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie4">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>325</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie5">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>225</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>305</y>
+      <width>35</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>背包4</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie6">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>325</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie10">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>250</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack4button1q">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>375</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie5">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>325</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>205</y>
+      <width>35</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>背包3</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie6">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>225</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack4button2c">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>375</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie8">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>350</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie7">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>250</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie11">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>350</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie3">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>225</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie1">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>225</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie2">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>225</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie9">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>250</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie10">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>350</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie7">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>350</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie3">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>325</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie1">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>325</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack3button2c">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>275</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie2">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>325</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack3button1q">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>275</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie12">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>350</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack4genie9">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>350</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie11">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>250</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie12">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>250</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie4">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>225</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack3genie8">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>250</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>505</y>
+      <width>35</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>背包6</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie10">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>550</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie1">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>425</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie1">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>525</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie9">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>550</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack6button2c">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>575</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie10">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>450</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie2">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>425</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie6">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>525</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie11">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>550</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack5button1q">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>475</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie7">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>450</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie5">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>425</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie2">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>525</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie11">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>450</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie3">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>425</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie8">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>450</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie12">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>450</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie7">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>550</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie4">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>425</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie8">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>550</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie12">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>550</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie6">
+    <property name="geometry">
+     <rect>
+      <x>305</x>
+      <y>425</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie3">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>525</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack6button1q">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>575</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie4_2">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>525</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack5genie9">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>450</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>405</y>
+      <width>35</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>背包5</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pack5button2c">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>475</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pack6genie5">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>525</y>
+      <width>55</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

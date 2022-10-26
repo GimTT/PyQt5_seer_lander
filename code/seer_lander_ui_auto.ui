@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>autoWindow</class>
+ <widget class="QMainWindow" name="autoWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>350</width>
+    <height>70</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>脚本选择</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="GuanQiaQueRen_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>35</y>
+      <width>70</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_GuanQiaPeiZhi">
+    <property name="geometry">
+     <rect>
+      <x>67</x>
+      <y>10</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>关卡配置</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_JingLingPeiZhi">
+    <property name="geometry">
+     <rect>
+      <x>237</x>
+      <y>10</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>精灵配置</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="JingLingQueRen_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>265</x>
+      <y>35</y>
+      <width>70</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="GuanQiaXuanZe_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>35</y>
+      <width>70</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>选择</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="JingLingXuanZe_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>35</y>
+      <width>70</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>选择</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
