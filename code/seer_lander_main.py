@@ -141,7 +141,7 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
         try:
             auto_click_end_list_file = open(os.getcwd() + '\\autoImg' + "\\自动确认" + "\\auto_click_end.txt", "rb")
             for file_name_index in auto_click_end_list_file:
-                self.auto_click_end_list.append(file_name_index.decode("utf-8").replace("\n", "").replace("\r", ""))
+                self.auto_click_end_list.append(file_name_index.decode("gb2312").replace("\n", "").replace("\r", ""))
             auto_click_end_list_file.close()
 
         except:
@@ -169,12 +169,13 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
     # 函数功能：将脚本执行图片列表读入（0：成功/-1：失败）
     def load_auto_fight_list(self):
         path = os.getcwd() + '\\autoImg'
+
         # 找关卡的列表
         if self.auto_window_t.point is not None:
             try:
                 auto_fight_point_list_file = open(self.auto_window_t.point + "\\point_init.txt", "rb")
                 for file_name_index in auto_fight_point_list_file:
-                    self.check_point_list.append(file_name_index.decode("utf-8").replace("\n", "").replace("\r", ""))
+                    self.check_point_list.append(file_name_index.decode("gb2312").replace("\n", "").replace("\r", ""))
                 auto_fight_point_list_file.close()
 
             except:
@@ -191,7 +192,7 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             try:
                 auto_fight_genie_list_file = open(path + "\\genie_init.txt", "rb")
                 for file_name_index in auto_fight_genie_list_file:
-                    self.fight_list.append(file_name_index.decode("utf-8").replace("\n", "").replace("\r", ""))
+                    self.fight_list.append(file_name_index.decode("gb2312").replace("\n", "").replace("\r", ""))
                 auto_fight_genie_list_file.close()
 
             except:
@@ -292,7 +293,8 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
                 return -1
 
     # 函数功能：进入仓库
-    def go_to_genie_library(self):
+    @staticmethod
+    def go_to_genie_library():
         pos = {}
         seer_lander_dm_drive.dm_drive_find_pic(0, 0, 1000, 600,
                                                os.getcwd() + '/' + 'autoImg' + '/' + "换背包" + '/' + "genie_button.bmp",
@@ -336,7 +338,8 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             seer_lander_dm_drive.dm.LeftClick()
 
     # 函数功能：放一只精灵到背包
-    def search_genie(self):
+    @staticmethod
+    def search_genie():
         seer_lander_dm_drive.dm_drive_delay(100)
 
         seer_lander_dm_drive.dm.KeyDownChar("enter")
@@ -376,8 +379,7 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
 
         seer_lander_dm_drive.dm_drive_delay(500)
 
-        seer_lander_dm_drive.dm_drive_find_pic(0, 0, 1000, 600,
-                                               os.getcwd() + '/' + 'autoImg' + '/' + "换背包" + '/' + "search_genie_pic.bmp",
+        seer_lander_dm_drive.dm_drive_find_pic(0, 0, 1000, 600, os.getcwd() + '/' + 'autoImg' + '/' + "换背包" + '/' + "search_genie_pic.bmp",
                                                "000000", 0.8, 0, pos)
         if pos['x'] != -1 and pos['y'] != -1:
             seer_lander_dm_drive.dm_drive_delay(10)
@@ -390,7 +392,8 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             seer_lander_dm_drive.dm.KeyUpChar("back")
 
     # 函数功能：返回背包界面
-    def return_pack(self):
+    @staticmethod
+    def return_pack():
         seer_lander_dm_drive.dm_drive_delay(500)
 
         pos = {}
@@ -532,6 +535,10 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
 
         elif connect == 12:  # 换六号背包
             self.seer_pack6_change()
+
+        elif connect == 99:
+            self.nono.close()  # 先关掉对象
+            self.open_from_nono()  # 重新打开
 
 
 if __name__ == '__main__':

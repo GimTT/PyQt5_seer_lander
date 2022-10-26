@@ -6,9 +6,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSignal
 
-# IMPORT PACKAGES END
 
-NONO_REINIT_FLAG = 0
+# IMPORT PACKAGES END
 
 
 # 配置图片序列以及显示顺序
@@ -24,23 +23,12 @@ class Nono:
         self.image_key_max = len(self.nonoList)
         self.image_url = self.nonoPath + '/('
         self.image = self.image_url + str(self.image_key) + ').png'
+        self.base_image = 'nonoImg' + '/' + 'nono_img_base.png'
         self.mouse_move_x = None
         self.mouse_move_y = None
 
     # 函数功能：导入动态序列
     def gif(self):
-        global NONO_REINIT_FLAG
-        if NONO_REINIT_FLAG == 1:
-            self.nonoConf = open(self.codePath + "\\ini" + "\\nono_config.txt", "r", encoding="gb2312")
-            self.nonoName = self.nonoConf.read()
-            self.nonoPath = 'nonoImg' + '/' + self.nonoName
-            self.nonoList = os.listdir(self.nonoPath)
-            self.image_key_max = len(self.nonoList)
-            self.image_url = self.nonoPath + '/('
-            self.image = self.image_url + str(self.image_key) + ').png'
-            self.mouse_move_x = None
-            self.mouse_move_y = None
-            NONO_REINIT_FLAG = 0
         if self.image_key < self.image_key_max:
             self.image_key += 1
         else:
@@ -54,7 +42,7 @@ class MyLabel(QLabel):
 
     def __init__(self, *args, **kw):
 
-        super().__init__(*args, **kw)
+        super().__init__(*args)
 
         # 声明
         self.menu = None
@@ -96,12 +84,11 @@ class MyLabel(QLabel):
 
     # 函数功能：切换皮肤
     def switch_skin_base(self, sequence_name):
-        global NONO_REINIT_FLAG
         path = os.getcwd()
         nono_conf = open(path + "\\ini" + "\\nono_config.txt", "w", encoding="gb2312")
         nono_conf.write(sequence_name)
         nono_conf.close()
-        NONO_REINIT_FLAG = 1
+        self.signal_nono_2_lander.emit(99)
 
     # 函数功能：切火王皮肤
     def switch_skin_anes(self):
@@ -130,7 +117,6 @@ class MyLabel(QLabel):
     # 函数功能：切威斯克皮肤
     def switch_skin_vsk(self):
         self.switch_skin_base("Vsk")
-
 
     # 函数功能：魔法脚本（未实现）
     def seer_magic(self):
@@ -197,7 +183,7 @@ class TablePet(QWidget):
     # 函数功能：载入ui
     def init_ui(self):
 
-        # 窗口大小
+        # 屏幕大小
         screen = QDesktopWidget().screenGeometry()
         self.setGeometry(0, 0, screen.width(), screen.height())
 
@@ -206,8 +192,6 @@ class TablePet(QWidget):
         self.pm_nono = QPixmap(self.nono.image)
         self.lb_nono.setPixmap(self.pm_nono)
 
-        # 屏幕坐标系
-        screen = QDesktopWidget().screenGeometry()
         # 窗口坐标系
         size = self.lb_nono.geometry()
         top = (screen.height() - size.height()) / 10 * 6

@@ -19,7 +19,7 @@ dm
 #### 使用说明
 
 1.  请以管理员身份运行python
-2.  打包（请将最后的参数修改为包路径）：pyinstaller -F -w seer_lander_main.py seer_lander_auto.py seer_lander_dm_drive.py seer_lander_ui_auto.py seer_lander_nono.py seer_lander_register.py seer_lander_speed.py seer_lander_ui_main.py seer_lander_ui_speed.py seer_lander_knapsack.py seer_lander_ui_free_pack.py -p C:\Users\16546\Desktop\GimXR_workspase\SEER\GimTT_SEER_Lander\Virtualenv\Lib\site-packages
+2.  打包（请将最后的参数修改为包路径）：pyinstaller -F -w seer_lander_main.py seer_lander_auto.py seer_lander_dm_drive.py seer_lander_ui_auto.py seer_lander_nono.py seer_lander_register.py seer_lander_speed.py seer_lander_ui_main.py seer_lander_ui_speed.py seer_lander_knapsack.py seer_lander_ui_free_pack.py -p ../Virtualenv/Lib/site-packages
 3.  请将解释器配置到3.6.8@32位
 
 #### 参与贡献

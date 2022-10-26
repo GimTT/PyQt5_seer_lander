@@ -23,8 +23,8 @@ def dm_drive_delay(time=100):
     loop.exec()
 
 
-def dm_drive_xy_memory(pid):
-    hProcess = win32api.OpenProcess(2035711, False, pid)
+def dm_drive_xy_memory(dm_pid):
+    hProcess = win32api.OpenProcess(2035711, False, dm_pid)
     pmc = win32process.GetProcessMemoryInfo(hProcess)
     if pmc != {}:
         win32api.CloseHandle(hProcess)

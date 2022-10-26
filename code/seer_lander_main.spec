@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['seer_lander_main.py', 'seer_lander_auto.py', 'seer_lander_dm_drive.py', 'seer_lander_ui_auto.py', 'seer_lander_nono.py', 'seer_lander_register.py', 'seer_lander_speed.py', 'seer_lander_ui_main.py', 'seer_lander_ui_speed.py', 'seer_lander_knapsack.py', 'seer_lander_ui_free_pack.py'],
-             pathex=['C:\\Users\\16546\\Desktop\\GimXR_workspase\\SEER\\GimTT_SEER_Lander\\Virtualenv\\Lib\\site-packages'],
+             pathex=['../Virtualenv/Lib/site-packages'],
              binaries=[],
              datas=[],
              hiddenimports=[],
