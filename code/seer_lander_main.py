@@ -1,10 +1,14 @@
 # IMPORT PACKAGES START
 import os
 import sys
+
+import win32com.client
 import win32gui
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from pycaw.pycaw import AudioUtilities
+import _thread
+import time
 # IMPORT PACKAGES END
 
 # IMPORT USER PY FILE START
@@ -59,7 +63,13 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
         self.load_seer_window()
         # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)  # 置顶lander
 
-        self.lander_lock_audio()  # 静音
+        sessions = AudioUtilities.GetAllSessions()
+        for session in sessions:
+            volume = session.SimpleAudioVolume
+
+            # 只有在打包后生效，调试时进程是python虚拟机
+            if session.Process and session.Process.name() == "seer_lander_main.exe":
+                volume.SetMute(1, None)
 
     # 函数功能：重写退出按钮
     def closeEvent(self, event):
@@ -115,6 +125,7 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
         # 设置识图目录
         path = os.getcwd() + '\\autoImg'
         seer_lander_dm_drive.dm.SetPath(path)
+        seer_lander_dm_drive.dm.SetDict(0, os.getcwd() + "\\ini" + "\\ziku.txt")
 
         # 自动登录
         pos = {}
@@ -294,27 +305,9 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
                 self.search_genie()
         self.return_pack()
 
-    # 函数功能：静音
-    @staticmethod
-    def lander_lock_audio(self):
-        sessions = AudioUtilities.GetAllSessions()
-        for session in sessions:
-            volume = session.SimpleAudioVolume
-
-            # 只有在打包后生效，调试时进程是python虚拟机
-            if session.Process and session.Process.name() == "seer_lander_main.exe":
-                volume.SetMute(1, None)
-
-    # 函数功能：取消静音
-    @staticmethod
-    def lander_no_lock_audio(self):
-        sessions = AudioUtilities.GetAllSessions()
-        for session in sessions:
-            volume = session.SimpleAudioVolume
-
-            # 只有在打包后生效，调试时进程是python虚拟机
-            if session.Process and session.Process.name() == "seer_lander_main.exe":
-                volume.SetMute(0, None)
+    # 函数功能：多线程脚本线程服务函数
+    def auto_84_task(self):
+        pass
 
     # 函数功能：根据信号执行函数
     def get_signal(self, connect):
@@ -327,10 +320,22 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             self.speed_window_t.speed_view_move()
 
         elif connect == 2:  # 静音
-            self.lander_lock_audio()
+            sessions = AudioUtilities.GetAllSessions()
+            for session in sessions:
+                volume = session.SimpleAudioVolume
+
+                # 只有在打包后生效，调试时进程是python虚拟机
+                if session.Process and session.Process.name() == "seer_lander_main.exe":
+                    volume.SetMute(1, None)
 
         elif connect == 3:  # 打开声音
-            self.lander_no_lock_audio()
+            sessions = AudioUtilities.GetAllSessions()
+            for session in sessions:
+                volume = session.SimpleAudioVolume
+
+                # 只有在打包后生效，调试时进程是python虚拟机
+                if session.Process and session.Process.name() == "seer_lander_main.exe":
+                    volume.SetMute(0, None)
 
         elif connect == 6:  # 打开换背包窗口
             self.pack_window_t.show()

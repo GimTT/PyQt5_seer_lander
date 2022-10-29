@@ -1,3 +1,4 @@
 genie_in_knapsack.bmp
 fight_pipi_win.bmp
 fight_pipi_loss.bmp
+data_not_define.bmp

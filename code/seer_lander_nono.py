@@ -46,7 +46,7 @@ class MyLabel(QLabel):
 
         # 声明
         self.menu = None
-        self.music_mute = False
+        self.music_mute = True
         self.setContextMenuPolicy(Qt.CustomContextMenu)
         # 开放右键策略
         self.customContextMenuRequested.connect(self.right_menu_show)
