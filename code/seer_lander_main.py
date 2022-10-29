@@ -26,10 +26,6 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
     def __init__(self):
         super().__init__()
 
-        # 找关卡和精灵出招的列表
-        self.fight_list = []
-        self.check_point_list = []
-
         # 自动确认的列表
         self.auto_click_end_list = []
 
@@ -166,132 +162,6 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
                     seer_lander_dm_drive.dm.LeftClick()
                     continue  # 判断到了就不判断了（有时更快）
 
-    # 函数功能：将脚本执行图片列表读入（0：成功/-1：失败）
-    def load_auto_fight_list(self):
-        path = os.getcwd() + '\\autoImg'
-
-        # 找关卡的列表
-        if self.auto_window_t.point is not None:
-            try:
-                auto_fight_point_list_file = open(self.auto_window_t.point + "\\point_init.txt", "rb")
-                for file_name_index in auto_fight_point_list_file:
-                    self.check_point_list.append(file_name_index.decode("gb2312").replace("\n", "").replace("\r", ""))
-                auto_fight_point_list_file.close()
-
-            except:
-                # print('找不到point_init.txt')
-                msg_box = QMessageBox(QMessageBox.Warning, "文件出错", "找不到point_init.txt")
-                msg_box.exec_()
-                return -1
-
-        else:
-            return -1
-
-        # 精灵出招列表
-        if self.auto_window_t.genie is not None:
-            try:
-                auto_fight_genie_list_file = open(path + "\\genie_init.txt", "rb")
-                for file_name_index in auto_fight_genie_list_file:
-                    self.fight_list.append(file_name_index.decode("gb2312").replace("\n", "").replace("\r", ""))
-                auto_fight_genie_list_file.close()
-
-            except:
-                # print('找不到genie_init.txt')
-                msg_box = QMessageBox(QMessageBox.Warning, "文件出错", "找不到genie_init.txt")
-                msg_box.exec_()
-                return -1
-
-        else:
-            return -1
-
-        return 0
-
-    # 函数功能：清空脚本图片列表
-    def clear_auto_fight_list(self):
-        self.check_point_list = []
-        self.fight_list = []
-
-    # 函数功能：进入关卡（超时2s）（0：成功/-1：失败）
-    def go_to_point(self):
-        for image_index in self.check_point_list:  # 按照顺序点击进入关卡 超时2s
-            pos = {}
-            if seer_lander_dm_drive.dm_drive_loop_find_click(0, 0, 1000, 600,
-                                                             self.auto_window_t.point + '/' + image_index, "000000",
-                                                             0.8, 0, pos, 40) == -1:  # 2s
-                msg_box = QMessageBox(QMessageBox.Warning, "文件出错", "找不到" + image_index)
-                msg_box.exec_()
-                return -1
-        return 0
-
-    # 函数功能：点击确认end（超时1s）（0：成功/-1：失败）(该函数会被弃用)
-    def auto_fight_end(self):
-        # 识别对战是否结束
-        seer_lander_dm_drive.dm_drive_delay(100)
-        for image_index in self.auto_click_end_list:
-            pos = {}
-            seer_lander_dm_drive.dm_drive_find_pic(0, 0, 1000, 600,
-                                                   os.getcwd() + '/' + 'autoImg' + '/' + "自动确认" + '/' + image_index,
-                                                   "000000", 0.8, 0, pos)
-            if pos['x'] != -1 and pos['y'] != -1:
-                seer_lander_dm_drive.dm.MoveTo(pos['x'], pos['y'])
-                seer_lander_dm_drive.dm.LeftClick()
-                return 0
-        return -1
-
-    # 函数功能：点击开始对战（超时2s）（0：成功/-1：失败）
-    def auto_fight_start(self):
-        pos = {}
-        if seer_lander_dm_drive.dm_drive_loop_find_click(0, 0, 1000, 600,
-                                                         self.auto_window_t.point + '/' + "开始.bmp", "000000",
-                                                         0.8, 0, pos, 40) == -1:
-            msg_box = QMessageBox(QMessageBox.Warning, "文件出错", "找不到开始.bmp")
-            msg_box.exec_()
-            return -1
-        else:
-            return 0
-
-    # 函数功能：循环对战（每招超时5s）（0：成功/-1：失败）
-    def loop_genie_fight(self):
-        while 1:
-            for image_index in self.fight_list:
-                # 识别技能图标(识别一次是2s)
-                pos = {}
-                loop_num = 0
-                while 1:
-                    if seer_lander_dm_drive.dm_drive_loop_find_click(0, 0, 1000, 600,
-                                                                     self.auto_window_t.genie + '/' + image_index,
-                                                                     "000000", 0.8, 0, pos, 20) == 0:  # 超时1s
-                        break
-
-                    else:  # 没识别到
-
-                        # 识别到战斗结束标志
-                        if self.auto_fight_end() == 0:  # 超时1s
-                            seer_lander_dm_drive.dm_drive_delay(1000)
-                            return 0
-                        # 识别不到技能->补pp
-                        else:
-                            loop_num += 1
-
-                        if loop_num >= 5:
-                            msg_box = QMessageBox(QMessageBox.Warning, "文件出错", "未识别技能，脚本停止")
-                            msg_box.exec_()
-                            return -1
-
-    # 函数功能：执行脚本（0：成功/-1：失败）
-    def loop_auto_fight_run(self):
-        self.clear_auto_fight_list()  # 清空列表
-        # 读取列表
-        if self.load_auto_fight_list() == -1:  # 读取失败
-            return -1
-        self.go_to_point()
-        while 1:
-            # self.go_to_point()
-            if self.auto_fight_start() == -1:
-                return -1
-            if self.loop_genie_fight() == -1:
-                return -1
-
     # 函数功能：进入仓库
     @staticmethod
     def go_to_genie_library():
@@ -379,7 +249,8 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
 
         seer_lander_dm_drive.dm_drive_delay(500)
 
-        seer_lander_dm_drive.dm_drive_find_pic(0, 0, 1000, 600, os.getcwd() + '/' + 'autoImg' + '/' + "换背包" + '/' + "search_genie_pic.bmp",
+        seer_lander_dm_drive.dm_drive_find_pic(0, 0, 1000, 600,
+                                               os.getcwd() + '/' + 'autoImg' + '/' + "换背包" + '/' + "search_genie_pic.bmp",
                                                "000000", 0.8, 0, pos)
         if pos['x'] != -1 and pos['y'] != -1:
             seer_lander_dm_drive.dm_drive_delay(10)
@@ -412,8 +283,8 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             msg_box.exec_()
             return
         for i in range(12):
-            if self.pack_window_t.pack1genie_view_list[i].text() != '':
-                seer_lander_dm_drive.dm.SendString(self.pid, self.pack_window_t.pack1genie_view_list[i].text())
+            if self.pack_window_t.packGenie_view_list[i].text() != '':
+                seer_lander_dm_drive.dm.SendString(self.pid, self.pack_window_t.packGenie_view_list[i].text())
                 self.search_genie()
         self.return_pack()
 
@@ -504,15 +375,6 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
                 # 只有在打包后生效，调试时进程是python虚拟机
                 if session.Process and session.Process.name() == "seer_lander_main.exe":
                     volume.SetMute(0, None)
-
-        elif connect == 4:  # 打开脚本
-            if not seer_lander_dm_drive.bind_status:
-                self.lander_ie_bind_dm()
-            self.auto_window_t.show()
-            self.auto_window_t.auto_view_move()
-
-        elif connect == 5:  # 执行脚本
-            self.loop_auto_fight_run()
 
         elif connect == 6:  # 打开换背包窗口
             self.pack_window_t.show()

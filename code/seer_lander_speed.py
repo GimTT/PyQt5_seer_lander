@@ -20,7 +20,7 @@ class SpeedUi(QMainWindow, seer_lander_ui_speed.Ui_SpeedWindow):
 
         self.textEdit_speed.setText("1")
         self.horizontalSlider.setMinimum(1)
-        self.horizontalSlider.setMaximum(4)
+        self.horizontalSlider.setMaximum(8)
         self.horizontalSlider.setSingleStep(1)
         self.horizontalSlider.valueChanged.connect(self.speed_text_change)
 

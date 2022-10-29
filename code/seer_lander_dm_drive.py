@@ -39,6 +39,7 @@ def dm_drive_find_pic(x1, y1, x2, y2, bmp, color, sin, code, pos):
     return flag
 
 
+# 该函数存在问题，不要再调用(date:22.10.30)
 def dm_drive_loop_find_click(x1, y1, x2, y2, bmp, color, sin, code, pos, time):
     for i in range(time):
         dm_drive_delay(50)
