@@ -1,5 +1,7 @@
 # IMPORT PACKAGES START
 from ctypes import CDLL, c_float
+
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QDesktopWidget
 import seer_lander_ui_speed
 
@@ -10,6 +12,10 @@ class SpeedUi(QMainWindow, seer_lander_ui_speed.Ui_SpeedWindow):
 
     def __init__(self):
         super().__init__()
+
+        # 设置图标
+        self.setWindowIcon(QIcon('./ini/GimTT_Lander_img.ico'))
+
         self.setupUi(self)
         self.setFixedSize(self.width(), self.height())
 

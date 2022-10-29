@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>确认</string>
+     <string>切换</string>
     </property>
    </widget>
    <widget class="QPushButton" name="packbuttonc">
@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>修改</string>
+     <string>保存</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="packgenie1">
@@ -209,33 +209,20 @@
      <string>备注：</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="packswitch">
+   <widget class="QComboBox" name="packswitch_combox">
     <property name="geometry">
      <rect>
-      <x>241</x>
+      <x>317</x>
       <y>6</y>
       <width>40</width>
       <height>22</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="packswbutton">
-    <property name="geometry">
-     <rect>
-      <x>284</x>
-      <y>6</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>切换</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>207</x>
+      <x>283</x>
       <y>10</y>
       <width>54</width>
       <height>12</height>
@@ -245,12 +232,12 @@
      <string>背包：</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="packgenie1_2">
+   <widget class="QLineEdit" name="packtitle">
     <property name="geometry">
      <rect>
       <x>42</x>
       <y>7</y>
-      <width>121</width>
+      <width>141</width>
       <height>20</height>
      </rect>
     </property>

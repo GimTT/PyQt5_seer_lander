@@ -2,6 +2,7 @@
 import os
 import sys
 import win32gui
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from pycaw.pycaw import AudioUtilities
 # IMPORT PACKAGES END
@@ -25,6 +26,9 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
     # 初始化部分
     def __init__(self):
         super().__init__()
+
+        # 设置图标
+        self.setWindowIcon(QIcon('./ini/GimTT_Lander_img.ico'))
 
         # 自动确认的列表
         self.auto_click_end_list = []
@@ -54,6 +58,8 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
         self.setFixedSize(self.width(), self.height())
         self.load_seer_window()
         # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)  # 置顶lander
+
+        self.lander_lock_audio()  # 静音
 
     # 函数功能：重写退出按钮
     def closeEvent(self, event):
@@ -276,8 +282,8 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             seer_lander_dm_drive.dm.MoveTo(pos['x'], pos['y'])
             seer_lander_dm_drive.dm.LeftClick()
 
-    # 函数功能：背包1
-    def seer_pack1_change(self):
+    # 函数功能：换背包
+    def seer_pack_change(self):
         if self.go_to_genie_library() == -1:
             msg_box = QMessageBox(QMessageBox.Warning, "脚本出错", "未识别仓库图标，脚本停止")
             msg_box.exec_()
@@ -288,65 +294,27 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
                 self.search_genie()
         self.return_pack()
 
-    # 函数功能：背包2
-    def seer_pack2_change(self):
-        if self.go_to_genie_library() == -1:
-            msg_box = QMessageBox(QMessageBox.Warning, "脚本出错", "未识别仓库图标，脚本停止")
-            msg_box.exec_()
-            return
-        for i in range(12):
-            if self.pack_window_t.pack2genie_view_list[i].text() != '':
-                seer_lander_dm_drive.dm.SendString(self.pid, self.pack_window_t.pack2genie_view_list[i].text())
-                self.search_genie()
-        self.return_pack()
+    # 函数功能：静音
+    @staticmethod
+    def lander_lock_audio(self):
+        sessions = AudioUtilities.GetAllSessions()
+        for session in sessions:
+            volume = session.SimpleAudioVolume
 
-    # 函数功能：背包3
-    def seer_pack3_change(self):
-        if self.go_to_genie_library() == -1:
-            msg_box = QMessageBox(QMessageBox.Warning, "脚本出错", "未识别仓库图标，脚本停止")
-            msg_box.exec_()
-            return
-        for i in range(12):
-            if self.pack_window_t.pack3genie_view_list[i].text() != '':
-                seer_lander_dm_drive.dm.SendString(self.pid, self.pack_window_t.pack3genie_view_list[i].text())
-                self.search_genie()
-        self.return_pack()
+            # 只有在打包后生效，调试时进程是python虚拟机
+            if session.Process and session.Process.name() == "seer_lander_main.exe":
+                volume.SetMute(1, None)
 
-    # 函数功能：背包4
-    def seer_pack4_change(self):
-        if self.go_to_genie_library() == -1:
-            msg_box = QMessageBox(QMessageBox.Warning, "脚本出错", "未识别仓库图标，脚本停止")
-            msg_box.exec_()
-            return
-        for i in range(12):
-            if self.pack_window_t.pack4genie_view_list[i].text() != '':
-                seer_lander_dm_drive.dm.SendString(self.pid, self.pack_window_t.pack4genie_view_list[i].text())
-                self.search_genie()
-        self.return_pack()
+    # 函数功能：取消静音
+    @staticmethod
+    def lander_no_lock_audio(self):
+        sessions = AudioUtilities.GetAllSessions()
+        for session in sessions:
+            volume = session.SimpleAudioVolume
 
-    # 函数功能：背包5
-    def seer_pack5_change(self):
-        if self.go_to_genie_library() == -1:
-            msg_box = QMessageBox(QMessageBox.Warning, "脚本出错", "未识别仓库图标，脚本停止")
-            msg_box.exec_()
-            return
-        for i in range(12):
-            if self.pack_window_t.pack5genie_view_list[i].text() != '':
-                seer_lander_dm_drive.dm.SendString(self.pid, self.pack_window_t.pack5genie_view_list[i].text())
-                self.search_genie()
-        self.return_pack()
-
-    # 函数功能：背包6
-    def seer_pack6_change(self):
-        if self.go_to_genie_library() == -1:
-            msg_box = QMessageBox(QMessageBox.Warning, "脚本出错", "未识别仓库图标，脚本停止")
-            msg_box.exec_()
-            return
-        for i in range(12):
-            if self.pack_window_t.pack6genie_view_list[i].text() != '':
-                seer_lander_dm_drive.dm.SendString(self.pid, self.pack_window_t.pack6genie_view_list[i].text())
-                self.search_genie()
-        self.return_pack()
+            # 只有在打包后生效，调试时进程是python虚拟机
+            if session.Process and session.Process.name() == "seer_lander_main.exe":
+                volume.SetMute(0, None)
 
     # 函数功能：根据信号执行函数
     def get_signal(self, connect):
@@ -359,46 +327,22 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             self.speed_window_t.speed_view_move()
 
         elif connect == 2:  # 静音
-            sessions = AudioUtilities.GetAllSessions()
-            for session in sessions:
-                volume = session.SimpleAudioVolume
-
-                # 只有在打包后生效，调试时进程是python虚拟机
-                if session.Process and session.Process.name() == "seer_lander_main.exe":
-                    volume.SetMute(1, None)
+            self.lander_lock_audio()
 
         elif connect == 3:  # 打开声音
-            sessions = AudioUtilities.GetAllSessions()
-            for session in sessions:
-                volume = session.SimpleAudioVolume
-
-                # 只有在打包后生效，调试时进程是python虚拟机
-                if session.Process and session.Process.name() == "seer_lander_main.exe":
-                    volume.SetMute(0, None)
+            self.lander_no_lock_audio()
 
         elif connect == 6:  # 打开换背包窗口
             self.pack_window_t.show()
             self.pack_window_t.pack_view_move()
 
         elif connect == 7:  # 换一号背包
-            self.seer_pack1_change()
+            self.seer_pack_change()
 
-        elif connect == 8:  # 换二号背包
-            self.seer_pack2_change()
+        elif connect == 98:  # 自动84
+            pass
 
-        elif connect == 9:  # 换三号背包
-            self.seer_pack3_change()
-
-        elif connect == 10:  # 换四号背包
-            self.seer_pack4_change()
-
-        elif connect == 11:  # 换五号背包
-            self.seer_pack5_change()
-
-        elif connect == 12:  # 换六号背包
-            self.seer_pack6_change()
-
-        elif connect == 99:
+        elif connect == 99:  # nono换皮肤
             self.nono.close()  # 先关掉对象
             self.open_from_nono()  # 重新打开
 

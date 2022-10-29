@@ -57,8 +57,11 @@ class MyLabel(QLabel):
         self.menu.addAction(QAction('刷新', self, triggered=self.re_fresh))
         self.menu.addAction(QAction('变速', self, triggered=self.set_speed))
         self.menu.addAction(QAction('静音', self, triggered=self.mute_music))
-        self.menu.addAction(QAction('脚本', self, triggered=self.auto_seer))
         self.menu.addAction(QAction('背包', self, triggered=self.pack_seer))
+
+        # 脚本合集（期望使用多线程实现）
+        script = self.menu.addMenu('脚本')
+        script.addAction(QAction('自动八四', self, triggered=self.auto_84))
 
         # 登陆器nono皮肤
         skin = self.menu.addMenu('皮肤')
@@ -81,6 +84,10 @@ class MyLabel(QLabel):
 
         self.menu.addAction(QAction('退出', self, triggered=self.quit))
         self.menu.exec_(QCursor.pos())
+
+    # 函数功能：自动84
+    def auto_84(self):
+        self.signal_nono_2_lander.emit(98)
 
     # 函数功能：切换皮肤
     def switch_skin_base(self, sequence_name):
