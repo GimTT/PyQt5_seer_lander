@@ -57,6 +57,15 @@ class MyLabel(QLabel):
         self.menu.addAction(QAction('刷新', self, triggered=self.re_fresh))
         self.menu.addAction(QAction('变速', self, triggered=self.set_speed))
         self.menu.addAction(QAction('静音', self, triggered=self.mute_music))
+
+        zoom = self.menu.addMenu('缩放')
+        zoom.addAction(QAction('原始大小', self, triggered=self.window_size_reset))
+        zoom.addAction(QAction('50%', self, triggered=self.window_size_50_percent))
+        zoom.addAction(QAction('75%', self, triggered=self.window_size_75_percent))
+        zoom.addAction(QAction('125%', self, triggered=self.window_size_125_percent))
+        zoom.addAction(QAction('150%', self, triggered=self.window_size_150_percent))
+        zoom.addAction(QAction('全屏', self, triggered=self.window_size_max))
+
         self.menu.addAction(QAction('背包', self, triggered=self.pack_seer))
 
         # 脚本合集（期望使用多线程实现）
@@ -158,6 +167,26 @@ class MyLabel(QLabel):
     # 函数功能：刷新
     def re_fresh(self):
         self.signal_nono_2_lander.emit(0)
+
+    # 缩放控制  BEGIN
+    def window_size_reset(self):
+        self.signal_nono_2_lander.emit(97)
+
+    def window_size_125_percent(self):
+        self.signal_nono_2_lander.emit(96)
+
+    def window_size_150_percent(self):
+        self.signal_nono_2_lander.emit(95)
+
+    def window_size_max(self):
+        self.signal_nono_2_lander.emit(94)
+
+    def window_size_75_percent(self):
+        self.signal_nono_2_lander.emit(93)
+
+    def window_size_50_percent(self):
+        self.signal_nono_2_lander.emit(92)
+    # 缩放控制  END
 
 
 # 桌宠类

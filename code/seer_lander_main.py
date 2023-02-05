@@ -2,13 +2,11 @@
 import os
 import sys
 
-import win32com.client
 import win32gui
+from PyQt5 import QtCore
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDesktopWidget
 from pycaw.pycaw import AudioUtilities
-import _thread
-import time
 # IMPORT PACKAGES END
 
 # IMPORT USER PY FILE START
@@ -19,9 +17,18 @@ import seer_lander_auto
 import seer_lander_ui_main
 import seer_lander_dm_drive
 import seer_lander_knapsack
-
+import game_window_thread
 
 # IMPORT USER PY FILE END
+
+
+DEBUG_MODE = False  # 调试模式
+
+# 相关参数
+MAIN_WINDOW_WIDTH = 960
+MAIN_WINDOW_HEIGHT = 560
+AXWIDGET_WINDOW_WIDTH = 980
+AXWIDGET_WINDOW_HEIGHT = 580
 
 
 # 主窗口类
@@ -31,8 +38,12 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
     def __init__(self):
         super().__init__()
 
+        # Threads handle def begin
+        self.seer_game_window_thread_handle = None
+        # Threads handle def end
+
         # 设置图标
-        self.setWindowIcon(QIcon('./ini/GimTT_Lander_img.ico'))
+        self.setWindowIcon(QIcon('ini/GimTT_Lander_img.ico'))
 
         # 自动确认的列表
         self.auto_click_end_list = []
@@ -44,7 +55,7 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
 
         # nono窗口
         self.nono = None
-        self.open_from_nono()
+        self.nono_init()
 
         # speed窗口
         self.speed_window_t = seer_lander_speed.SpeedUi()
@@ -59,45 +70,72 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
 
         # 登陆器窗口
         self.setupUi(self)
-        self.setFixedSize(self.width(), self.height())
-        self.load_seer_window()
+        # self.setFixedSize(self.width(), self.height())
         # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)  # 置顶lander
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # 不显示边框
+        # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)  # 有透明边框
+        self.start_seer_game_window_thread()
+        self.lock_music()
 
-        sessions = AudioUtilities.GetAllSessions()
-        for session in sessions:
-            volume = session.SimpleAudioVolume
-
-            # 只有在打包后生效，调试时进程是python虚拟机
-            if session.Process and session.Process.name() == "seer_lander_main.exe":
-                volume.SetMute(1, None)
-
-    # 函数功能：重写退出按钮
-    def closeEvent(self, event):
-        reply = QMessageBox.question(self, '确认退出', "退出登陆器？", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-
-        if reply == QMessageBox.Yes:
-            event.accept()
-            sys.exit(0)  # 退出程序
-        else:
-            event.ignore()
-
-    # 函数功能：配置axWidget
-    def load_seer_window(self):
-        self.axWidget.setControl("{8856F961-340A-11D0-A96B-00C04FD705A2}")
-        self.axWidget.setProperty("DisplayAlerts", False)
-        self.axWidget.setProperty("DisplayScrollBars", True)
-        self.axWidget.dynamicCall("Navigate(const QString&)", "http://seer.61.com/play.shtml")
-        # self.axWidget.dynamicCall("Navigate(const QString&)", "www.baidu.com")
-
-    # 函数功能：刷新IE
-    def load_seer_window_refresh(self):
-        self.axWidget.dynamicCall("Refresh(void)")
+    # 函数功能：多线程方式启动赛尔号窗口（缓解卡顿）
+    def start_seer_game_window_thread(self):
+        self.seer_game_window_thread_handle = game_window_thread.GameWindowThread(self.axWidget)
+        self.seer_game_window_thread_handle.start()
 
     # 函数功能：启动nono
-    def open_from_nono(self):
+    def nono_init(self):
         self.nono = seer_lander_nono.TablePet()  # 声明
         self.nono.lb_nono.signal_nono_2_lander.connect(self.get_signal)  # 链接信号
         self.nono.show()  # 显示
+
+    # 函数功能：移动到屏幕中心
+    def move_2_center(self):
+        center_pointer = QDesktopWidget().availableGeometry().center()
+        x = center_pointer.x()
+        y = center_pointer.y()
+        tl_x, tl_y, width, height = self.frameGeometry().getRect()  # 窗口左上角坐标(x,y)、宽高(W, H)
+        self.move(x - width / 2, y - height / 2)
+
+    # 函数功能：缩放   BEGIN
+    def size_max(self):
+        desktop = QApplication.desktop()
+        base = (desktop.width() / MAIN_WINDOW_WIDTH) * 0.9
+        self.resize(MAIN_WINDOW_WIDTH * base, MAIN_WINDOW_HEIGHT * base)
+        self.groupBox.resize(MAIN_WINDOW_WIDTH * base, MAIN_WINDOW_HEIGHT * base)
+        self.axWidget.resize(AXWIDGET_WINDOW_WIDTH * base + 50, AXWIDGET_WINDOW_HEIGHT * base + 50)
+        self.move_2_center()
+
+    def size_50percent(self):
+        self.resize(480, 280)
+        self.groupBox.resize(480, 280)
+        self.axWidget.resize(500, 300)
+        self.move_2_center()
+
+    def size_75percent(self):
+        self.resize(720, 420)
+        self.groupBox.resize(720, 420)
+        self.axWidget.resize(740, 440)
+        self.move_2_center()
+
+    def size_125percent(self):
+        self.resize(1200, 700)
+        self.groupBox.resize(1200, 700)
+        self.axWidget.resize(1225, 725)
+        self.move_2_center()
+
+    def size_150percent(self):
+        self.resize(1440, 840)
+        self.groupBox.resize(1440, 840)
+        self.axWidget.resize(1470, 870)
+        self.move_2_center()
+
+    def size_reset(self):
+        self.resize(960, 560)
+        self.groupBox.resize(960, 560)
+        self.axWidget.resize(980, 580)
+        self.move_2_center()
+
+    # 函数功能：缩放   ENG
 
     # 函数功能：绑定大漠
     def lander_ie_bind_dm(self):
@@ -123,9 +161,9 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             seer_lander_dm_drive.bind_status = True
 
         # 设置识图目录
-        path = os.getcwd() + '\\autoImg'
+        path = os.getcwd() + '/autoImg'
         seer_lander_dm_drive.dm.SetPath(path)
-        seer_lander_dm_drive.dm.SetDict(0, os.getcwd() + "\\ini" + "\\ziku.txt")
+        seer_lander_dm_drive.dm.SetDict(0, os.getcwd() + "/ini" + "/ziku.txt")
 
         # 自动登录
         pos = {}
@@ -152,7 +190,7 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
     def load_auto_click_end_list(self):
         # 读入自动确认的列表 （自动确认部分应放在dm绑定成功之后）
         try:
-            auto_click_end_list_file = open(os.getcwd() + '\\autoImg' + "\\自动确认" + "\\auto_click_end.txt", "rb")
+            auto_click_end_list_file = open(os.getcwd() + '/autoImg' + "/自动确认" + "/auto_click_end.txt", "rb")
             for file_name_index in auto_click_end_list_file:
                 self.auto_click_end_list.append(file_name_index.decode("gb2312").replace("\n", "").replace("\r", ""))
             auto_click_end_list_file.close()
@@ -293,6 +331,36 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             seer_lander_dm_drive.dm.MoveTo(pos['x'], pos['y'])
             seer_lander_dm_drive.dm.LeftClick()
 
+    # 函数功能：取消静音
+    @staticmethod
+    def lock_music():
+        sessions = AudioUtilities.GetAllSessions()
+        for session in sessions:
+            volume = session.SimpleAudioVolume
+
+            # 只有在打包后生效，调试时进程是python虚拟机
+            if DEBUG_MODE:
+                if session.Process and session.Process.name() == "python.exe":
+                    volume.SetMute(1, None)
+            else:
+                if session.Process and session.Process.name() == "seer_lander_main.exe":
+                    volume.SetMute(1, None)
+
+    # 函数功能：静音
+    @staticmethod
+    def unlock_music():
+        sessions = AudioUtilities.GetAllSessions()
+        for session in sessions:
+            volume = session.SimpleAudioVolume
+
+            # 只有在打包后生效，调试时进程是python虚拟机
+            if DEBUG_MODE:
+                if session.Process and session.Process.name() == "python.exe":
+                    volume.SetMute(0, None)
+            else:
+                if session.Process and session.Process.name() == "seer_lander_main.exe":
+                    volume.SetMute(0, None)
+
     # 函数功能：换背包
     def seer_pack_change(self):
         if self.go_to_genie_library() == -1:
@@ -313,29 +381,17 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
     def get_signal(self, connect):
         # python3.10+新增了switch语句，但本项目的环境为3.6.8
         if connect == 0:  # 刷新
-            self.load_seer_window_refresh()
+            self.seer_game_window_thread_handle.refresh()
 
         elif connect == 1:  # 变速窗口
             self.speed_window_t.show()
             self.speed_window_t.speed_view_move()
 
         elif connect == 2:  # 静音
-            sessions = AudioUtilities.GetAllSessions()
-            for session in sessions:
-                volume = session.SimpleAudioVolume
-
-                # 只有在打包后生效，调试时进程是python虚拟机
-                if session.Process and session.Process.name() == "seer_lander_main.exe":
-                    volume.SetMute(1, None)
+            self.lock_music()
 
         elif connect == 3:  # 打开声音
-            sessions = AudioUtilities.GetAllSessions()
-            for session in sessions:
-                volume = session.SimpleAudioVolume
-
-                # 只有在打包后生效，调试时进程是python虚拟机
-                if session.Process and session.Process.name() == "seer_lander_main.exe":
-                    volume.SetMute(0, None)
+            self.unlock_music()
 
         elif connect == 6:  # 打开换背包窗口
             self.pack_window_t.show()
@@ -344,12 +400,36 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
         elif connect == 7:  # 换一号背包
             self.seer_pack_change()
 
+        elif connect == 92:
+            self.seer_game_window_thread_handle.size_50percent()
+            self.size_50percent()
+
+        elif connect == 93:
+            self.seer_game_window_thread_handle.size_75percent()
+            self.size_75percent()
+
+        elif connect == 94:
+            self.seer_game_window_thread_handle.size_max()
+            self.size_max()
+
+        elif connect == 95:
+            self.seer_game_window_thread_handle.size_150percent()
+            self.size_150percent()
+
+        elif connect == 96:
+            self.seer_game_window_thread_handle.size_125percent()
+            self.size_125percent()
+
+        elif connect == 97:
+            self.seer_game_window_thread_handle.size_reset()
+            self.size_reset()
+
         elif connect == 98:  # 自动84
             pass
 
         elif connect == 99:  # nono换皮肤
             self.nono.close()  # 先关掉对象
-            self.open_from_nono()  # 重新打开
+            self.nono_init()  # 重新打开
 
 
 if __name__ == '__main__':

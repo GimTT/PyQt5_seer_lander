@@ -4,8 +4,8 @@
 block_cipher = None
 
 
-a = Analysis(['seer_lander_main.py', 'seer_lander_auto.py', 'seer_lander_dm_drive.py', 'seer_lander_ui_auto.py', 'seer_lander_nono.py', 'seer_lander_register.py', 'seer_lander_speed.py', 'seer_lander_ui_main.py', 'seer_lander_ui_speed.py', 'seer_lander_knapsack.py', 'seer_lander_ui_free_pack.py'],
-             pathex=['../Virtualenv/Lib/site-packages'],
+a = Analysis(['seer_lander_main.py', 'seer_lander_auto.py', 'seer_lander_dm_drive.py', 'seer_lander_ui_auto.py', 'seer_lander_nono.py', 'seer_lander_register.py', 'seer_lander_speed.py', 'seer_lander_ui_main.py', 'seer_lander_ui_speed.py', 'game_window_thread.py', 'seer_lander_knapsack.py', 'seer_lander_ui_free_pack.py'],
+             pathex=['../venv/Lib/site-packages'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -37,4 +37,4 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
-          entitlements_file=None )
+          entitlements_file=None , icon='ini\\GimTT_Lander_img.ico')
