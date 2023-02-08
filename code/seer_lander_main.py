@@ -27,8 +27,8 @@ DEBUG_MODE = False  # 调试模式
 # 相关参数
 MAIN_WINDOW_WIDTH = 960
 MAIN_WINDOW_HEIGHT = 560
-AXWIDGET_WINDOW_WIDTH = 980
-AXWIDGET_WINDOW_HEIGHT = 580
+AX_WIDGET_WINDOW_WIDTH = 980
+AX_WIDGET_WINDOW_HEIGHT = 580
 
 
 # 主窗口类
@@ -102,7 +102,7 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
         base = (desktop.width() / MAIN_WINDOW_WIDTH) * 0.9
         self.resize(MAIN_WINDOW_WIDTH * base, MAIN_WINDOW_HEIGHT * base)
         self.groupBox.resize(MAIN_WINDOW_WIDTH * base, MAIN_WINDOW_HEIGHT * base)
-        self.axWidget.resize(AXWIDGET_WINDOW_WIDTH * base + 50, AXWIDGET_WINDOW_HEIGHT * base + 50)
+        self.axWidget.resize(AX_WIDGET_WINDOW_WIDTH * base + 50, AX_WIDGET_WINDOW_HEIGHT * base + 50)
         self.move_2_center()
 
     def size_50percent(self):
