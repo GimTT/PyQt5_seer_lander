@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['seer_lander_main.py', 'seer_lander_auto.py', 'seer_lander_dm_drive.py', 'seer_lander_ui_auto.py', 'seer_lander_nono.py', 'seer_lander_register.py', 'seer_lander_speed.py', 'seer_lander_ui_main.py', 'seer_lander_ui_speed.py', 'game_window_thread.py', 'seer_lander_knapsack.py', 'seer_lander_ui_free_pack.py'],
+a = Analysis(['seer_lander_main.py', 'display_base.py', 'global_define.py', 'seer_lander_auto.py', 'seer_lander_dm_drive.py', 'seer_lander_ui_auto.py', 'seer_lander_nono.py', 'seer_lander_register.py', 'seer_lander_speed.py', 'seer_lander_ui_main.py', 'seer_lander_ui_speed.py', 'game_window_thread.py', 'seer_lander_knapsack.py', 'seer_lander_ui_free_pack.py'],
              pathex=['../venv/Lib/site-packages'],
              binaries=[],
              datas=[],

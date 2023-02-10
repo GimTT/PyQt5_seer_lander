@@ -43,6 +43,5 @@ missing module named Queue - imported by comtypes._comobject (delayed, condition
 missing module named cStringIO - imported by comtypes.tools.codegenerator (conditional), comtypes.client._generate (conditional)
 missing module named copy_reg - imported by cStringIO (top-level)
 missing module named numpy - imported by comtypes.npsupport (delayed, conditional, optional), comtypes.safearray (delayed, conditional)
-missing module named comtypes.gen - imported by comtypes (delayed), comtypes.client._code_cache (delayed, optional), comtypes.client._generate (delayed), comtypes.client (top-level)
 missing module named 'numpy.ctypeslib' - imported by comtypes.npsupport (delayed, optional)
 missing module named posix - imported by os (conditional, optional)

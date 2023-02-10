@@ -9,39 +9,35 @@ class GameWindowThread(QThread):
 
     def __init__(self, show_area):
         super().__init__()
-        self.game_area = show_area
-        self.size = 100
-        self.game_area.setControl("{8856F961-340A-11D0-A96B-00C04FD705A2}")
-        self.game_area.setProperty("DisplayAlerts", False)
-        self.game_area.setProperty("DisplayScrollBars", True)
-        self.game_area.dynamicCall("Navigate(const QString&)", "http://seer.61.com/play.shtml")
+        self.disp_area = show_area
+        self.zoom_scale = 100
+        self.normal_scale = 100
+        self.desktop = QApplication.desktop()
+        self.disp_area.setControl("{8856F961-340A-11D0-A96B-00C04FD705A2}")
+        self.disp_area.setProperty("DisplayAlerts", False)
+        self.disp_area.setProperty("DisplayScrollBars", True)
+        self.disp_area.dynamicCall("Navigate(const QString&)", "http://seer.61.com/play.shtml")
+        # 公司防查
+        # self.game_area.dynamicCall("Navigate(const QString&)", "www.baidu.com")
 
+    # name      :   refresh
+    # parameter :   none
+    # function  :   刷新页面
     def refresh(self):
-        self.game_area.dynamicCall("Refresh()")
-        # self.game_area.dynamicCall("ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, 150)")
+        self.disp_area.dynamicCall("Refresh()")
 
-    def size_50percent(self):
-        self.size = 50
-        self.game_area.dynamicCall("ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, " + str(self.size) + ")")
+    # name      :   set_size
+    # parameter :   scale:要放大到的比例
+    # function  :   通过调用ie的缩放函数放大窗口
+    def set_size(self, scale):
+        self.zoom_scale = scale
+        self.disp_area.dynamicCall(
+            "ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, " + str(self.zoom_scale) + ")")
 
-    def size_75percent(self):
-        self.size = 75
-        self.game_area.dynamicCall("ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, " + str(self.size) + ")")
-
-    def size_125percent(self):
-        self.size = 125
-        self.game_area.dynamicCall("ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, " + str(self.size) + ")")
-
-    def size_150percent(self):
-        self.size = 150
-        self.game_area.dynamicCall("ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, " + str(self.size) + ")")
-
-    def size_max(self):
-        desktop = QApplication.desktop()
-        self.size = ((desktop.width() / GAME_INIT_WIDTH) * 100) * 0.9
-        self.game_area.dynamicCall("ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, " + str(int(self.size)) + ")")
-
-    def size_reset(self):
-        self.size = 100
-        self.game_area.dynamicCall("ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, " + str(self.size) + ")")
-        # self.game_area.dynamicCall(self.sizeConfig(200))
+    # name      :   reset_size
+    # parameter :   none
+    # function  :   重置页面大小
+    def reset_size(self):
+        self.zoom_scale = self.normal_scale
+        self.disp_area.dynamicCall(
+            "ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, " + str(self.zoom_scale) + ")")

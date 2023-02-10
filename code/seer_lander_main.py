@@ -1,4 +1,5 @@
 # IMPORT PACKAGES START
+import math
 import os
 import sys
 
@@ -10,6 +11,7 @@ from pycaw.pycaw import AudioUtilities
 # IMPORT PACKAGES END
 
 # IMPORT USER PY FILE START
+from global_define import *
 import seer_lander_register
 import seer_lander_nono
 import seer_lander_speed
@@ -18,17 +20,16 @@ import seer_lander_ui_main
 import seer_lander_dm_drive
 import seer_lander_knapsack
 import game_window_thread
+import display_base
 
 # IMPORT USER PY FILE END
 
-
-DEBUG_MODE = False  # 调试模式
-
-# 相关参数
-MAIN_WINDOW_WIDTH = 960
-MAIN_WINDOW_HEIGHT = 560
-AX_WIDGET_WINDOW_WIDTH = 980
-AX_WIDGET_WINDOW_HEIGHT = 580
+'''
+system_window(1920 * 1080)  16 : 9
+lander_window(960 * 560)    
+WIDTH       |       2 : 1
+HEIGHT      |       27 : 14
+'''
 
 
 # 主窗口类
@@ -37,10 +38,20 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
     # 初始化部分
     def __init__(self):
         super().__init__()
-
         # Threads handle def begin
         self.seer_game_window_thread_handle = None
         # Threads handle def end
+
+        # Create Object being
+
+        # Create Object end
+
+        self.desktop = QApplication.desktop()
+        self.desktopWidth = int(self.desktop.width())
+        self.desktopHeight = int(self.desktop.height())
+        self.width = MAIN_WINDOW_WIDTH
+        self.height = MAIN_WINDOW_HEIGHT
+        self.scale = None
 
         # 设置图标
         self.setWindowIcon(QIcon('ini/GimTT_Lander_img.ico'))
@@ -70,12 +81,60 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
 
         # 登陆器窗口
         self.setupUi(self)
-        # self.setFixedSize(self.width(), self.height())
-        # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)  # 置顶lander
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # 不显示边框
-        # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)  # 有透明边框
+        self.init_size()
+        self.set_size(self.width, self.height)
+
+        self.disable_title_bar()
         self.start_seer_game_window_thread()
         self.lock_music()
+
+    # name      :   set_size
+    # parameter :   width:宽度, height: 宽度
+    # function  :   设置窗口大小
+    def set_size(self, width, height):
+        self.resize(width, height)
+        self.groupBox.resize(width, height)
+        self.axWidget.resize(width + 100, height + 100)
+        self.move_to_center()
+
+    # name      :   calculate_screen_scale
+    # parameter :   none
+    # function  :   计算屏幕比例
+    def init_size(self):
+        if self.desktop.width() > self.desktopHeight:  # 若屏幕宽大于高
+            self.height = int(self.desktopHeight * MAIN_WINDOW_HEIGHT / DISPLAY_HEIGHT_1080P)
+            self.width = int(self.height * MAIN_WINDOW_WIDTH / MAIN_WINDOW_HEIGHT)
+
+    # name      :   calculate_screen_scale
+    # parameter :   scale:缩放比例(小数)
+    # function  :   计算屏幕比例
+    def reset_size(self, scale):
+        self.set_size(int(self.width * scale), int(self.height * scale))
+        game_area_scale = math.ceil(game_scale * scale)
+        if game_area_scale % 2 != 0 and game_area_scale % 10 != 5:
+            game_area_scale += 1
+        if DEBUG_MODE:
+            print("[scale:%d]" % game_area_scale)
+        self.seer_game_window_thread_handle.set_size(game_area_scale)
+        self.move_to_center()
+
+    # name      :   show_title_bar
+    # parameter :   none
+    # function  :   显示标题栏
+    def enable_title_bar(self):
+        self.setWindowFlags(QtCore.Qt.Widget)  # 重设标签（去除所有flag）
+        self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint)  # 禁用最小化和关闭按钮
+        # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)  # 置顶窗口
+        #
+        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # 不显示边框
+        # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)  # 有透明边框
+
+    # name      :   disable_title_bar
+    # parameter :   none
+    # function  :   不显示标题栏
+    def disable_title_bar(self):
+        self.setWindowFlags(QtCore.Qt.Widget)  # 重设标签（去除所有flag）
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # 不显示边框
 
     # 函数功能：多线程方式启动赛尔号窗口（缓解卡顿）
     def start_seer_game_window_thread(self):
@@ -89,53 +148,12 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
         self.nono.show()  # 显示
 
     # 函数功能：移动到屏幕中心
-    def move_2_center(self):
+    def move_to_center(self):
         center_pointer = QDesktopWidget().availableGeometry().center()
         x = center_pointer.x()
         y = center_pointer.y()
         tl_x, tl_y, width, height = self.frameGeometry().getRect()  # 窗口左上角坐标(x,y)、宽高(W, H)
         self.move(x - width / 2, y - height / 2)
-
-    # 函数功能：缩放   BEGIN
-    def size_max(self):
-        desktop = QApplication.desktop()
-        base = (desktop.width() / MAIN_WINDOW_WIDTH) * 0.9
-        self.resize(MAIN_WINDOW_WIDTH * base, MAIN_WINDOW_HEIGHT * base)
-        self.groupBox.resize(MAIN_WINDOW_WIDTH * base, MAIN_WINDOW_HEIGHT * base)
-        self.axWidget.resize(AX_WIDGET_WINDOW_WIDTH * base + 50, AX_WIDGET_WINDOW_HEIGHT * base + 50)
-        self.move_2_center()
-
-    def size_50percent(self):
-        self.resize(480, 280)
-        self.groupBox.resize(480, 280)
-        self.axWidget.resize(500, 300)
-        self.move_2_center()
-
-    def size_75percent(self):
-        self.resize(720, 420)
-        self.groupBox.resize(720, 420)
-        self.axWidget.resize(740, 440)
-        self.move_2_center()
-
-    def size_125percent(self):
-        self.resize(1200, 700)
-        self.groupBox.resize(1200, 700)
-        self.axWidget.resize(1225, 725)
-        self.move_2_center()
-
-    def size_150percent(self):
-        self.resize(1440, 840)
-        self.groupBox.resize(1440, 840)
-        self.axWidget.resize(1470, 870)
-        self.move_2_center()
-
-    def size_reset(self):
-        self.resize(960, 560)
-        self.groupBox.resize(960, 560)
-        self.axWidget.resize(980, 580)
-        self.move_2_center()
-
-    # 函数功能：缩放   ENG
 
     # 函数功能：绑定大漠
     def lander_ie_bind_dm(self):
@@ -172,6 +190,9 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             seer_lander_dm_drive.dm_drive_delay(10)
             seer_lander_dm_drive.dm.MoveTo(pos['x'] - 379, pos['y'] - 65)
             seer_lander_dm_drive.dm.LeftClick()
+
+        if game_scale != 0:
+            self.seer_game_window_thread_handle.set_size(game_scale)
 
     # 注册自动确认函数（会执行）
     def auto_click_end_register(self):
@@ -401,28 +422,23 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
             self.seer_pack_change()
 
         elif connect == 92:
-            self.seer_game_window_thread_handle.size_50percent()
-            self.size_50percent()
+            self.reset_size(0.5)
 
         elif connect == 93:
-            self.seer_game_window_thread_handle.size_75percent()
-            self.size_75percent()
+            self.reset_size(0.75)
 
         elif connect == 94:
-            self.seer_game_window_thread_handle.size_max()
-            self.size_max()
+            self.reset_size(1.75)
 
         elif connect == 95:
-            self.seer_game_window_thread_handle.size_150percent()
-            self.size_150percent()
+            self.reset_size(1.5)
 
         elif connect == 96:
-            self.seer_game_window_thread_handle.size_125percent()
-            self.size_125percent()
+            self.reset_size(1.25)
 
         elif connect == 97:
-            self.seer_game_window_thread_handle.size_reset()
-            self.size_reset()
+            self.set_size(self.width, self.height)
+            self.seer_game_window_thread_handle.set_size(game_scale)
 
         elif connect == 98:  # 自动84
             pass
@@ -433,11 +449,11 @@ class MainLanderUi(QMainWindow, seer_lander_ui_main.Ui_MainWindow):
 
 
 if __name__ == '__main__':
+    QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     landerApp = QApplication(sys.argv)
     MainWindow = MainLanderUi()
     MainWindow.show()
     seer_lander_dm_drive.dm_drive_delay(3000)
     MainWindow.lander_ie_bind_dm()
     MainWindow.auto_click_end_register()
-
     landerApp.exit(landerApp.exec_())
